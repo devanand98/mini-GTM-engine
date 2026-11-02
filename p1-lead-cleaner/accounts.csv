@@ -1,0 +1,127 @@
+status,account_id,company_name,match_key,domain,country,city,employees_num,headcount_bucket,industry,linkedin_url,is_customer,source,source_record_id,filled_from,dq_flags,run_id
+accepted,acc_7d1056d5,Authologic,authologic,authologic.com,PL,Warsaw,44,11-50,"B2B -> Engineering, Product and Design",https://www.linkedin.com/company/authologic/,false,yc,23531,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_1a0de6a3,Spokn,spokn,getspokn.com,US,New York City,20,11-50,B2B -> Operations,https://www.linkedin.com/company/getspokn/,false,yc,22666,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_90914852,Oneleet,oneleet,oneleet.com,NL,Amsterdam,75,51-200,B2B -> Security,https://www.linkedin.com/company/oneleet/,false,yc,27162,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_6d8e62a5,Glide,glide,glideapps.com,US,San Francisco,46,11-50,"B2B -> Engineering, Product and Design",,false,yc,12256,,,run_202611020454
+accepted,acc_2b024cb0,HOKALI,hokali,hokali.com,US,San Francisco,12,11-50,B2B -> Marketing,https://www.linkedin.com/company/hokali/,false,yc,25606,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_59ab37d5,Slite,slite,slite.com,DE,Berlin,40,11-50,B2B -> Productivity,,false,yc,1748,,,run_202611020454
+accepted,acc_355b6bfb,Capitol AI,capitol ai,capitol.ai,US,Washington,11,11-50,B2B -> Productivity,https://www.linkedin.com/company/capitolai/,false,yc,29963,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_2d7c7e59,Seam,seam,seam.co,US,San Francisco,25,11-50,"B2B -> Engineering, Product and Design",,false,yc,21800,,,run_202611020454
+accepted,acc_c80ff60c,Taktile,taktile,taktile.com,DE,Berlin,150,51-200,B2B,,false,yc,22124,,,run_202611020454
+accepted,acc_990f9692,Ontop,ontop,getontop.com,US,Miami,186,51-200,B2B,,false,yc,23238,,,run_202611020454
+accepted,acc_8f330c57,Elyos AI,elyos ai,elyos.ai,GB,London,20,11-50,B2B -> Operations,https://www.linkedin.com/company/elyosai/?originalSubdomain=uk,false,yc,28784,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_aeac54ee,Laminar,laminar,laminar.com,US,San Francisco,15,11-50,B2B,,false,yc,30115,,,run_202611020454
+accepted,acc_d0c1318e,Nuvocargo,nuvocargo,nuvocargo.com,US,New York City,100,51-200,B2B -> Supply Chain and Logistics,https://www.linkedin.com/company/nuvocargo/,false,yc,1778,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_9f4367b2,Porter,porter,porter.run,US,New York City,18,11-50,B2B -> Infrastructure,,false,yc,13091,,,run_202611020454
+accepted,acc_bda0f145,Kobalt Labs,kobalt labs,kobaltlabs.com,US,New York City,12,11-50,B2B -> Operations,,false,yc,28971,,,run_202611020454
+accepted,acc_d5e9c241,Lob,lob,lob.com,US,New York City,150,51-200,B2B -> Marketing,,false,yc,552,,,run_202611020454
+accepted,acc_7ffec889,SingleStore,singlestore,singlestore.com,US,San Francisco,150,51-200,B2B -> Infrastructure,https://www.linkedin.com/company/singlestore/,false,yc,134,legacy_crm:linkedin_url,,run_202611020454
+accepted,acc_bbc47402,Ashby,ashby,ashbyhq.com,US,San Francisco,110,51-200,B2B -> Recruiting and Talent,,false,yc,12035,,,run_202611020454
+accepted,acc_37ed0077,Inventive AI,inventive ai,inventive.ai,US,San Francisco,15,11-50,B2B -> Sales,,false,yc,29040,,,run_202611020454
+accepted,acc_253779b4,Recurrency,recurrency,recurrency.com,US,San Francisco,50,11-50,B2B -> Sales,,true,yc,13330,,,run_202611020454
+accepted,acc_ca7454f6,inBuild,inbuild,inbuild.ai,US,Wilmington,12,11-50,B2B,,true,yc,28019,,,run_202611020454
+accepted,acc_857def50,Auctor,auctor,getauctor.com,US,New York City,30,11-50,B2B,,true,yc,30425,,,run_202611020454
+accepted,acc_b3681f49,FleetWorks,fleetworks,fleetworks.ai,US,San Francisco,20,11-50,B2B -> Supply Chain and Logistics,,true,yc,28880,,,run_202611020454
+accepted,acc_91778f7f,Confident LIMS,confident lims,confidentlims.com,US,San Francisco,17,11-50,B2B -> Operations,,true,yc,889,,,run_202611020454
+accepted,acc_95277088,Popl,popl,popl.co,US,New York City,60,51-200,B2B,,true,yc,22878,,,run_202611020454
+accepted,acc_b5b465be,Arketa,arketa,arketa.com,US,New York City,55,51-200,B2B -> Operations,,true,yc,22084,,,run_202611020454
+accepted,acc_cf6083e8,ReadMe,readme,readme.com,US,New York City,52,51-200,"B2B -> Engineering, Product and Design",,true,yc,782,,,run_202611020454
+accepted,acc_108b49f6,Humaans,humaans,humaans.io,GB,London,48,11-50,B2B -> Human Resources,,true,yc,22638,,,run_202611020454
+accepted,acc_0af219aa,Imgix,imgix,imgix.com,US,San Francisco,34,11-50,B2B -> Infrastructure,,true,yc,116,,,run_202611020454
+accepted,acc_2cf9cc21,Langdock,langdock,langdock.com,DE,Berlin,55,51-200,B2B -> Productivity,,true,yc,29041,,,run_202611020454
+accepted,acc_9d5146fc,Semble,semble,sembleai.com,US,San Francisco,14,11-50,B2B,,true,yc,30885,,,run_202611020454
+accepted,acc_4cd6a58f,Riot,riot,tryriot.com,FR,Paris,160,51-200,B2B -> Security,,false,yc,13311,,,run_202611020454
+accepted,acc_4acae6b0,Epsilon3,epsilon3,epsilon3.io,US,Los Angeles,12,11-50,B2B -> Operations,,false,yc,23817,,,run_202611020454
+accepted,acc_dc7e73ac,Zaymo,zaymo,zaymo.com,US,Lehi,13,11-50,B2B -> Marketing,,false,yc,29323,,,run_202611020454
+accepted,acc_667a6488,Fly.io,fly io,fly.io,US,Chicago,48,11-50,B2B -> Infrastructure,,false,yc,13175,,,run_202611020454
+accepted,acc_58157b29,Cloudchipr,cloudchipr,cloudchipr.com,DE,Berlin,25,11-50,B2B,,false,yc,27844,,,run_202611020454
+accepted,acc_fc714211,KERNEL,kernel,kernel.sh,US,San Francisco,22,11-50,B2B -> Infrastructure,,false,yc,30762,,,run_202611020454
+accepted,acc_40f4e11d,Mashgin,mashgin,mashgin.com,US,San Francisco,150,51-200,B2B -> Retail,,false,yc,856,,,run_202611020454
+accepted,acc_19d9e146,Upwave,upwave,upwave.com,US,San Francisco,50,11-50,B2B -> Operations,,false,yc,428,,,run_202611020454
+accepted,acc_ffc61d01,Aurelian,aurelian,aurelian.com,US,Seattle,45,11-50,B2B,,false,yc,26913,,,run_202611020454
+accepted,acc_bfb9be4f,Veryfi,veryfi,veryfi.com,US,San Francisco,70,51-200,B2B,,false,yc,1498,,,run_202611020454
+accepted,acc_d70ca65f,Instrumentl,instrumentl,instrumentl.com,US,San Francisco,60,51-200,B2B,,false,yc,1224,,,run_202611020454
+accepted,acc_5544e575,OpenReplay,openreplay,openreplay.com,US,New York City,11,11-50,B2B -> Infrastructure,,false,yc,12637,,,run_202611020454
+accepted,acc_4bc17304,Vori,vori,vori.com,US,San Francisco,29,11-50,B2B -> Retail,,false,yc,13240,,,run_202611020454
+accepted,acc_3158f5e0,Chatfuel,chatfuel,chatfuel.com,US,San Francisco,53,51-200,"B2B -> Engineering, Product and Design",,false,yc,985,,,run_202611020454
+accepted,acc_d15418f6,Roboflow,roboflow,roboflow.com,US,San Francisco,100,51-200,"B2B -> Engineering, Product and Design",,false,yc,21769,,,run_202611020454
+accepted,acc_9109c68b,Twenty,twenty,twenty.com,FR,Paris,11,11-50,B2B,,false,yc,28777,,,run_202611020454
+accepted,acc_4f96929e,Glimpse,glimpse,tryglimpse.com,US,New York City,52,51-200,B2B -> Retail,,false,yc,22218,,,run_202611020454
+accepted,acc_57fc0a43,Stayflexi,stayflexi,business.stayflexi.com,US,San Francisco,58,51-200,B2B,,false,yc,23236,,,run_202611020454
+accepted,acc_77265116,Overwatch,overwatch,overwatchdata.ai,US,New York City,14,11-50,B2B -> Security,,false,yc,26776,,,run_202611020454
+accepted,acc_a3c7389a,Bite Ninja,bite ninja,biteninja.com,US,Memphis,20,11-50,B2B,,false,yc,24140,,,run_202611020454
+accepted,acc_5dae7e2f,Tandem,tandem,tandemspace.com,US,San Francisco,22,11-50,B2B -> Office Management,,false,yc,29691,,,run_202611020454
+accepted,acc_d46f1c75,Anakin,anakin,anakin.io,US,Austin,70,51-200,B2B -> Analytics,,false,yc,24141,,,run_202611020454
+accepted,acc_138ae6f3,Momentic,momentic,momentic.ai,US,San Francisco,15,11-50,"B2B -> Engineering, Product and Design",,false,yc,29256,,,run_202611020454
+accepted,acc_d976f454,Model ML,model ml,modelml.com,GB,London,180,51-200,B2B,,false,yc,29410,,,run_202611020454
+accepted,acc_9e8247cd,Release,release,release.com,US,Los Angeles,26,11-50,"B2B -> Engineering, Product and Design",,false,yc,13234,,,run_202611020454
+accepted,acc_ee701038,d_model,dmodel,dmodel.ai,US,San Francisco,20,11-50,"B2B -> Engineering, Product and Design",,false,yc,29703,,,run_202611020454
+accepted,acc_f609499d,Cyble,cyble,cyble.com,US,San Francisco,197,51-200,B2B -> Security,,false,yc,22781,,,run_202611020454
+accepted,acc_63ddd742,Datasaur,datasaur,datasaur.ai,US,San Francisco,60,51-200,B2B,,false,yc,13144,,,run_202611020454
+accepted,acc_f50d8512,Bitmovin,bitmovin,bitmovin.com,US,San Francisco,145,51-200,B2B -> Infrastructure,,false,yc,960,,,run_202611020454
+accepted,acc_df3a8f4e,Copia,copia,gocopia.com,US,San Francisco,20,11-50,B2B -> Office Management,,false,yc,1009,,,run_202611020454
+accepted,acc_c17afa16,Shaped,shaped,shaped.ai,US,New York City,25,11-50,B2B -> Infrastructure,,false,yc,25969,,,run_202611020454
+accepted,acc_284c30b5,Howdy.com,howdy com,howdy.com,US,Austin,140,51-200,B2B -> Recruiting and Talent,,false,yc,22658,,,run_202611020454
+accepted,acc_e972146b,Seal,seal,seal.run,GB,London,22,11-50,B2B -> Operations,,false,yc,21909,,,run_202611020454
+accepted,acc_6bc95630,Maintouch,maintouch,maintouch.com,US,New York City,15,11-50,B2B,,false,yc,28899,,,run_202611020454
+accepted,acc_1313dd69,Broccoli AI,broccoli ai,broccoli.com,US,San Francisco,85,51-200,"B2B -> Engineering, Product and Design",,false,yc,25819,,,run_202611020454
+accepted,acc_eb6e0294,RedBrick AI,redbrick ai,redbrickai.com,US,Claymont,13,11-50,B2B,,false,yc,25610,,,run_202611020454
+accepted,acc_fbe58e3e,Hudu,hudu,hudu.com,US,Fort Collins,26,11-50,B2B -> Operations,,false,yc,22942,,,run_202611020454
+accepted,acc_a02977c5,Genuity,genuity,gogenuity.com,US,Chicago,31,11-50,B2B,,false,yc,24575,,,run_202611020454
+accepted,acc_31f94536,Clerky,clerky,clerky.com,US,San Francisco,35,11-50,B2B -> Legal,,false,yc,91,,,run_202611020454
+accepted,acc_9cd5a8e2,Alex,alex,alex.com,US,San Francisco,30,11-50,B2B -> Recruiting and Talent,,false,yc,29263,,,run_202611020454
+accepted,acc_43a1eb2c,Zensors,zensors,zensors.com,US,San Francisco,12,11-50,B2B,,false,yc,24476,,,run_202611020454
+accepted,acc_cdbad1b0,Mintlify,mintlify,mintlify.com,US,San Francisco,75,51-200,"B2B -> Engineering, Product and Design",,false,yc,25643,,,run_202611020454
+accepted,acc_49b3297c,TaxGPT,taxgpt,taxgpt.com,US,San Francisco,45,11-50,B2B -> Finance and Accounting,,false,yc,29710,,,run_202611020454
+accepted,acc_e43b141d,Freshpaint,freshpaint,freshpaint.io,US,San Francisco,120,51-200,B2B -> Infrastructure,,false,yc,12845,,,run_202611020454
+accepted,acc_5dd8d4fd,weweb.io,weweb io,weweb.io,FR,Paris,12,11-50,B2B -> Operations,,false,yc,22856,,,run_202611020454
+accepted,acc_e4a57480,Substack,substack,substack.com,US,San Francisco,90,51-200,B2B -> Marketing,,false,yc,1828,,,run_202611020454
+accepted,acc_58cc38c6,SwiftSku,swiftsku,swiftsku.com,US,New York City,35,11-50,B2B -> Retail,,false,yc,23598,,,run_202611020454
+accepted,acc_e0438237,GrowthBook,growthbook,growthbook.io,US,San Francisco,40,11-50,B2B -> Analytics,,false,yc,25174,,,run_202611020454
+accepted,acc_f34122e9,Conveo,conveo,conveo.ai,GB,London,90,51-200,B2B,,false,yc,29717,,,run_202611020454
+accepted,acc_11dbe00d,Toma,toma,toma.com,US,San Francisco,20,11-50,B2B -> Operations,,false,yc,29377,,,run_202611020454
+accepted,acc_5e07b74c,Jasper.ai,jasper ai,jasper.ai,US,Austin,195,51-200,B2B,,false,yc,1734,,,run_202611020454
+accepted,acc_3cddd3ce,Tavus,tavus,tavus.io,US,San Francisco,75,51-200,B2B,,false,yc,24161,,,run_202611020454
+accepted,acc_e96b3057,F2,f2,f2.ai,US,New York City,15,11-50,"B2B -> Engineering, Product and Design",,false,yc,30832,,,run_202611020454
+accepted,acc_48cbf017,Draftwise,draftwise,draftwise.com,US,New York City,50,11-50,B2B -> Legal,,false,yc,22131,,,run_202611020454
+accepted,acc_12523268,Andon Labs,andon labs,andonlabs.com,US,San Francisco,11,11-50,"B2B -> Engineering, Product and Design",,false,yc,29253,,,run_202611020454
+accepted,acc_f6873ea5,Rinsed,rinsed,rinsed.com,US,New York City,80,51-200,B2B,,false,yc,22884,,,run_202611020454
+accepted,acc_a9abb797,Ekho,ekho,ekho.com,US,New York City,30,11-50,B2B -> Supply Chain and Logistics,,false,yc,27054,,,run_202611020454
+accepted,acc_844c0176,Tiptap,tiptap,tiptap.dev,DE,Berlin,19,11-50,"B2B -> Engineering, Product and Design",,false,yc,29079,,,run_202611020454
+accepted,acc_3d5f2fa4,DemandSphere,demandsphere,demandsphere.com,US,Columbus,40,11-50,B2B -> Marketing,,false,yc,187,,,run_202611020454
+accepted,acc_42a49724,Videopixie,videopixie,videopixie.com,US,San Francisco,11,11-50,B2B -> Marketing,,false,yc,112,,,run_202611020454
+accepted,acc_e373ef27,AthenaHQ,athenahq,athenahq.ai,US,San Francisco,12,11-50,B2B -> Marketing,,false,yc,30268,,,run_202611020454
+accepted,acc_a8dda778,Recall.ai,recall ai,recall.ai,US,San Francisco,30,11-50,B2B -> Infrastructure,,false,yc,13519,,,run_202611020454
+accepted,acc_27a01e9e,Hona,hona,hona.com,US,Orem,32,11-50,B2B -> Legal,,false,yc,27961,,,run_202611020454
+accepted,acc_0686c840,Confido,confido,confidotech.com,US,New York City,65,51-200,B2B -> Finance and Accounting,,false,yc,24064,,,run_202611020454
+accepted,acc_a21a17ed,Salient,salient,trysalient.com,US,San Francisco,40,11-50,B2B,,false,yc,27808,,,run_202611020454
+accepted,acc_1ceed376,Trayd,trayd,buildtrayd.com,US,New York City,34,11-50,B2B -> Finance and Accounting,,false,yc,29090,,,run_202611020454
+accepted,acc_4508fc1a,Within,within,within.ai,US,San Francisco,128,51-200,B2B,,false,yc,1891,,,run_202611020454
+accepted,acc_33945d71,Happl,happl,happl.com,GB,London,11,11-50,B2B -> Human Resources,,false,yc,25521,,,run_202611020454
+accepted,acc_12d6742d,Warp,warp,warp.co,US,New York City,80,51-200,B2B,,false,yc,28369,,,run_202611020454
+accepted,acc_56cb727d,Etleap,etleap,etleap.com,US,San Francisco,11,11-50,B2B -> Infrastructure,,false,yc,488,,,run_202611020454
+accepted,acc_df8801ec,NanoNets,nanonets,nanonets.com,US,San Francisco,102,51-200,B2B -> Productivity,,false,yc,1530,,,run_202611020454
+accepted,acc_f4bf0c4d,Lago,lago,getlago.com,US,San Francisco,27,11-50,B2B -> Finance and Accounting,,false,yc,24151,,,run_202611020454
+accepted,acc_622f5ba5,Nash,nash,usenash.com,US,San Francisco,40,11-50,B2B -> Supply Chain and Logistics,,false,yc,24876,,,run_202611020454
+accepted,acc_c4d3ebe3,HockeyStack,hockeystack,hockeystack.com,US,San Francisco,32,11-50,B2B -> Sales,,false,yc,28589,,,run_202611020454
+accepted,acc_860f7d8d,SalesPatriot,salespatriot,salespatriot.com,US,San Francisco,15,11-50,B2B -> Operations,,false,yc,30230,,,run_202611020454
+accepted,acc_e9ca1c91,Cognition IP,cognition ip,cognitionip.com,US,San Francisco,12,11-50,B2B -> Legal,,false,yc,1818,,,run_202611020454
+accepted,acc_5d8dbca7,Ticket Wallet,ticket wallet,ticketwallet.com,US,New York City,20,11-50,B2B,,false,yc,30472,,,run_202611020454
+accepted,acc_228c5c28,Gigs,gigs,gigs.com,US,San Francisco,150,51-200,"B2B -> Engineering, Product and Design",,false,yc,23389,,,run_202611020454
+accepted,acc_3416f719,Benepass,benepass,getbenepass.com,US,New York City,45,11-50,B2B -> Human Resources,,false,yc,13170,,,run_202611020454
+accepted,acc_30833b70,Prolific,prolific,prolific.com,GB,London,180,51-200,B2B,,false,yc,12612,,,run_202611020454
+accepted,acc_4320c14e,Navattic,navattic,navattic.com,US,New York City,40,11-50,B2B -> Marketing,,false,yc,23431,,,run_202611020454
+accepted,acc_d9b98b3b,Stacksync,stacksync,stacksync.com,US,San Francisco,34,11-50,"B2B -> Engineering, Product and Design",,false,yc,29434,,,run_202611020454
+accepted,acc_ad8dbaf1,Clearly AI,clearly ai,clearly-ai.com,US,Seattle,17,11-50,B2B -> Security,,false,yc,29729,,,run_202611020454
+accepted,acc_a67cf4ff,Extend,extend,extend.ai,US,New York City,25,11-50,B2B,,false,yc,27871,,,run_202611020454
+accepted,acc_da6dab35,Customily,customily,customily.com,US,St. Louis,30,11-50,"B2B -> Engineering, Product and Design",,false,yc,23956,,,run_202611020454
+accepted,acc_d5b8fa37,Gem,gem,gem.com,US,San Francisco,200,51-200,B2B -> Recruiting and Talent,,false,yc,1694,,,run_202611020454
+accepted,acc_5642c70f,Artificial Societies,artificial societies,societies.ai,GB,London,18,11-50,B2B,,false,yc,30298,,,run_202611020454
+accepted,acc_f88727ef,Archil,archil,archil.com,US,San Francisco,11,11-50,B2B -> Infrastructure,,false,yc,30045,,,run_202611020454
+accepted,acc_7892ae29,HappyRobot,happyrobot,happyrobot.ai,US,San Francisco,80,51-200,B2B -> Supply Chain and Logistics,,false,yc,29069,,,run_202611020454
+accepted,acc_477c33b1,Zeo Route Planner,zeo route planner,zeorouteplanner.com,US,San Francisco,15,11-50,B2B -> Supply Chain and Logistics,,false,legacy_crm,13352,,,run_202611020454
+accepted,acc_158cb04e,Omnistrate,omnistrate,omnistrate.com,US,San Francisco,15,11-50,B2B,,false,legacy_crm,27813,,website_was_email,run_202611020454
+accepted,acc_3467a522,Makrwatch,makrwatch,makrwatch.com,US,New York City,19,11-50,B2B -> Marketing,,false,legacy_crm,791,,,run_202611020454
+accepted,acc_9a669b81,The Cococart,cococart,cococart.co,ES,Madrid,18,11-50,B2B,,false,legacy_crm,23777,,,run_202611020454
+accepted,acc_39b81e01,The HiOperator,hioperator,hioperator.com,US,Dallas,200,51-200,B2B -> Operations,,false,legacy_crm,1252,,,run_202611020454
+accepted,acc_351376bc,Embeddables,embeddables,embeddables.com,US,San Francisco,23,11-50,B2B -> Productivity,,false,legacy_crm,1938,,,run_202611020454

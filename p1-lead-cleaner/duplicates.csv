@@ -1,0 +1,39 @@
+status,source,source_record_id,company_name,website,duplicate_of,matched_by,run_id
+duplicate,legacy_crm,23531,Authologic,https://authologic.com,acc_7d1056d5,domain,run_202611020454
+duplicate,legacy_crm,22666,SPOKN,https://getspokn.com/,acc_1a0de6a3,domain,run_202611020454
+duplicate,legacy_crm,27162,Oneleet INC,https://www.oneleet.com/?utm_source=yc&utm_medium=bookface,acc_90914852,domain,run_202611020454
+duplicate,legacy_crm,12256,Glide,https://www.glideapps.com,acc_6d8e62a5,domain,run_202611020454
+duplicate,legacy_crm,25606,HOKALI LTD,https://www.hokali.com/,acc_2b024cb0,domain,run_202611020454
+duplicate,legacy_crm,1748,Slite,https://slite.com/,acc_59ab37d5,domain,run_202611020454
+duplicate,legacy_crm,29963,Capitol AI,https://www.capitol.ai/,acc_355b6bfb,domain,run_202611020454
+duplicate,legacy_crm,21800,Seam,https://seam.co,acc_2d7c7e59,domain,run_202611020454
+duplicate,legacy_crm,22124,Taktile,http://www.taktile.com,acc_c80ff60c,domain,run_202611020454
+duplicate,legacy_crm,23238,Ontop,https://www.getontop.com/pricing,acc_990f9692,domain,run_202611020454
+duplicate,legacy_crm,28784,Elyos AI,https://www.elyos.ai/about,acc_8f330c57,domain,run_202611020454
+duplicate,legacy_crm,30115,Laminar,https://laminar.com,acc_aeac54ee,domain,run_202611020454
+duplicate,legacy_crm,1778,Nuvocargo,http://www.nuvocargo.com,acc_d0c1318e,domain,run_202611020454
+duplicate,legacy_crm,13091,Porter,https://porter.run,acc_9f4367b2,domain,run_202611020454
+duplicate,legacy_crm,28971,Kobalt Labs,,acc_bda0f145,name_key,run_202611020454
+duplicate,legacy_crm,552,Lob,http://lob.com,acc_d5e9c241,domain,run_202611020454
+duplicate,legacy_crm,134,SingleStore,https://www.singlestore.com,acc_7ffec889,domain,run_202611020454
+duplicate,legacy_crm,12035,Ashby,,acc_bbc47402,name_key,run_202611020454
+duplicate,legacy_crm,29040,Inventive AI,,acc_37ed0077,name_key,run_202611020454
+duplicate,legacy_crm,13330,Recurrency,http://www.recurrency.com,acc_253779b4,domain,run_202611020454
+duplicate,legacy_crm,28019,inBuild,,acc_ca7454f6,name_key,run_202611020454
+duplicate,legacy_crm,30425,Auctor,https://getauctor.com,acc_857def50,domain,run_202611020454
+duplicate,legacy_crm,28880,FleetWorks,https://fleetworks.com,acc_b3681f49,name_key,run_202611020454
+duplicate,legacy_crm,889,Confident LIMS,https://confidentlims.com,acc_91778f7f,domain,run_202611020454
+duplicate,legacy_crm,22878,Popl,https://popl.co/,acc_95277088,domain,run_202611020454
+duplicate,legacy_crm,22084,Arketa,https://arketa.com,acc_b5b465be,domain,run_202611020454
+duplicate,legacy_crm,782,ReadMe,http://readme.com,acc_cf6083e8,domain,run_202611020454
+duplicate,legacy_crm,22638,Humaans,https://humaans.com ,acc_108b49f6,name_key,run_202611020454
+duplicate,legacy_crm,116,Imgix,https://www.imgix.com,acc_0af219aa,domain,run_202611020454
+duplicate,legacy_crm,29041,Langdock,https://langdock.com,acc_2cf9cc21,domain,run_202611020454
+duplicate,legacy_crm,30885,Semble,https://www.sembleai.com,acc_9d5146fc,domain,run_202611020454
+duplicate,legacy_crm,13311,Riot,https://tryriot.com/,acc_4cd6a58f,domain,run_202611020454
+duplicate,legacy_crm,23817,Epsilon3,https://www.epsilon3.com/,acc_4acae6b0,name_key,run_202611020454
+duplicate,legacy_crm,29323,Zaymo,https://zaymo.com,acc_dc7e73ac,domain,run_202611020454
+duplicate,legacy_crm,13175,Fly.io,https://fly.io,acc_667a6488,domain,run_202611020454
+duplicate,legacy_crm,27844,Cloudchipr,https://cloudchipr.com/,acc_58157b29,domain,run_202611020454
+duplicate,legacy_crm,30762,KERNEL,https://www.kernel.sh,acc_fc714211,domain,run_202611020454
+duplicate,legacy_crm,856,Mashgin,http://mashgin.com,acc_40f4e11d,domain,run_202611020454

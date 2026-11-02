@@ -1,0 +1,361 @@
+{
+  "name": "P1 Lead Cleaner",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload Lead sources",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "YC List",
+              "fieldType": "file",
+              "acceptFileTypes": "csv",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Legacy CRM Export",
+              "fieldType": "file",
+              "acceptFileTypes": "csv",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "02410c54-8e34-4d6b-b603-68267d82b57d",
+      "name": "On form submission",
+      "webhookId": "f4a61486-ebf5-48aa-a081-ca8f085971cb"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "YC_List",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        -144
+      ],
+      "id": "116de446-a534-473f-b8ed-182a8b10efc2",
+      "name": "Read YC"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "Legacy_CRM_Export",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        64
+      ],
+      "id": "b679410b-327b-409d-ae8d-57413221c63f",
+      "name": "Read CRM"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e7e37583-57cd-407d-acdf-c54ad1d84fab",
+              "name": "source",
+              "value": "legacy_crm",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        432,
+        64
+      ],
+      "id": "f1eb2f03-f2e9-4d50-b25d-339f11db862b",
+      "name": "Label the CRM rows"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        576,
+        -128
+      ],
+      "id": "101d738c-52be-47b4-90ec-8c4ee9f59c66",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ===== Lead Cleaner v2 (your decisions D1-D4) =====\n// n8n Code node, Mode: Run Once for All Items\n// Input: YC rows first, then legacy CRM rows (the Merge node does this order)\n\n// ---- Reference lists (D3: fixed value lists) ----\nconst REF_COUNTRY = {\n  'usa':'US','us':'US','u.s':'US','u.s.':'US','united states':'US','united states of america':'US',\n  'uk':'GB','united kingdom':'GB','gb':'GB','england':'GB',\n  'germany':'DE','france':'FR','netherlands':'NL','ireland':'IE','spain':'ES','sweden':'SE',\n  'poland':'PL','denmark':'DK','finland':'FI','belgium':'BE','austria':'AT','portugal':'PT',\n  'italy':'IT','estonia':'EE'\n};\n// Existing Truewatch customers (from product-brief.md): never prospect these\nconst CUSTOMERS = ['recurrency','inbuild','auctor','fleetworks','confident lims','popl',\n  'arketa','readme','humaans','imgix','langdock','semble'];\nconst FREE_EMAIL = ['gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com'];\n\n// ---- Helpers ----\nfunction cleanDomain(website) {\n  let w = String(website || '').trim().toLowerCase();\n  if (w.includes('@')) w = w.split('@')[1];      // email typed in the website field\n  w = w.replace(/^https?:\\/\\//, '').replace(/^www\\./, '');\n  w = w.split(/[\\/?#]/)[0];                       // drop path, ?utm=..., #...\n  return /^[a-z0-9-]+(\\.[a-z0-9-]+)+$/.test(w) ? w : '';\n}\nfunction matchKey(name) {                          // D2: ugly on purpose, never shown\n  return String(name || '').toLowerCase()\n    .normalize('NFD').replace(/[̀-ͯ]/g, '')   // remove accents\n    .replace(/^the\\s+/, '')\n    .replace(/[.,]/g, ' ')\n    .replace(/\\b(inc|llc|ltd|limited|gmbh|corp|co)\\b/g, '')\n    .replace(/[^a-z0-9 ]/g, '')\n    .replace(/\\s+/g, ' ').trim();\n}\nfunction displayName(name) {                       // D2: what a rep sees\n  return String(name || '').trim().replace(/\\s+/g, ' ')\n    .replace(/,?\\s+(INC|LTD|Inc\\.?|Ltd\\.?|LLC)$/,'');\n}\nfunction domainStem(domain) { return domain ? domain.split('.')[0] : ''; }\nfunction bucket(n) {                               // D3: five fixed buckets\n  if (!n) return '';\n  if (n <= 10) return '1-10';\n  if (n <= 50) return '11-50';\n  if (n <= 200) return '51-200';\n  if (n <= 500) return '201-500';\n  return '500+';\n}\nfunction makeId(domain) {                          // same domain -> same ID forever\n  let h = 0x811c9dc5;\n  for (const c of domain) { h ^= c.charCodeAt(0); h = Math.imul(h, 0x01000193) >>> 0; }\n  return 'acc_' + h.toString(16).padStart(8, '0');\n}\n\n// ---- Main loop ----\nconst accounts = [];          // surviving records\nconst byDomain = {}, byKey = {}, byStem = {};\nconst duplicates = [], review = [];\nconst runId = 'run_' + new Date().toISOString().slice(0,16).replace(/[-:T]/g,'');\n\nfor (const item of items) {\n  const r = item.json;\n  const flags = [];\n  const domain = cleanDomain(r.website);\n  if (!domain) flags.push(r.website ? 'invalid_website' : 'missing_website');\n  if (String(r.website || '').includes('@')) flags.push('website_was_email');\n  if (FREE_EMAIL.includes(domain)) flags.push('free_email_domain');\n\n  const rawCountry = String(r.country || '').trim().toLowerCase();\n  const country = REF_COUNTRY[rawCountry] || '';\n  if (!country) flags.push('unmapped_country:' + r.country);   // D4: flag, never guess\n\n  const num = parseInt(String(r.employees || '').replace(/[^0-9]/g, ''), 10) || null;\n  if (!num) flags.push('missing_employees');\n\n  const key = matchKey(r.company_name);\n  const stem = domainStem(domain);\n\n  // D1: match cascade - domain, then name key, then domain stem\n  let match = null, matchedBy = '';\n  if (domain && byDomain[domain])      { match = byDomain[domain]; matchedBy = 'domain'; }\n  else if (key && byKey[key])          { match = byKey[key];       matchedBy = 'name_key'; }\n  else if (stem && byStem[stem])       { match = byStem[stem];     matchedBy = 'domain_stem'; }\n\n  if (match) {\n    // fill blanks in the survivor from the duplicate (field-level merge)\n    if (!match.linkedin_url && r.linkedin_url) { match.linkedin_url = r.linkedin_url; match.filled_from.push(r.source + ':linkedin_url'); }\n    duplicates.push({ status: 'duplicate', source: r.source, source_record_id: r.source_record_id,\n      company_name: r.company_name, website: r.website, duplicate_of: match.account_id,\n      matched_by: matchedBy, run_id: runId });\n    continue;\n  }\n\n  if (!domain) {   // can't identify it and nothing matched: a human decides (D1 last step)\n    review.push({ status: 'review', source: r.source, source_record_id: r.source_record_id,\n      company_name: r.company_name, website: r.website, dq_flags: flags.join('; '), run_id: runId });\n    continue;\n  }\n\n  const acc = {\n    status: 'accepted', account_id: makeId(domain), company_name: displayName(r.company_name),\n    match_key: key, domain, country, city: r.city || '', employees_num: num || '',\n    headcount_bucket: bucket(num), industry: r.industry || '', linkedin_url: r.linkedin_url || '',\n    is_customer: CUSTOMERS.includes(key), source: r.source, source_record_id: r.source_record_id,\n    filled_from: [], dq_flags: flags.join('; '), run_id: runId\n  };\n  accounts.push(acc);\n  byDomain[domain] = acc; if (key) byKey[key] = acc; byStem[stem] = acc;\n}\n\nreturn [...accounts.map(a => ({ json: { ...a, filled_from: a.filled_from.join('; ') } })),\n        ...duplicates.map(d => ({ json: d })),\n        ...review.map(v => ({ json: v }))];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        -128
+      ],
+      "id": "e1198ac2-877c-48a5-be11-c3da4be0d32f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "accepted",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "0b38385a-8737-4fad-8ef2-336f6f0e745f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "accepted"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "d1cf45eb-bafc-4343-8f15-1a43a738592a",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "duplicate",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "duplicate"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "15cb28c0-96b6-49b6-8e89-d77eca7ba9cd",
+                    "leftValue": "={{ $json.status }}",
+                    "rightValue": "review",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "review"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        1024,
+        -128
+      ],
+      "id": "f2e03ddf-e265-4d68-813c-53dcfc7f1a2e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "options": {
+          "fileName": "accounts.csv"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1248,
+        -304
+      ],
+      "id": "dd80a6f2-24ac-46af-a659-e7df47004d3c",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "options": {
+          "fileName": "duplicates.csv"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1248,
+        -128
+      ],
+      "id": "29a7f3f0-5022-4cb3-a971-ebb276dc7a2a",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "fileName": "review.csv"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1248,
+        64
+      ],
+      "id": "37c31804-0b7c-4b45-b7da-809a71b1a135",
+      "name": "Convert to File2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Read YC",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read CRM": {
+      "main": [
+        [
+          {
+            "node": "Label the CRM rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read YC": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Label the CRM rows": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "31437455-362e-4f08-9f3e-e6528606801b",
+  "meta": {
+    "instanceId": "1f3faca7019ee6873821af51705374953a0cf48e28599af68a598555ddc83b46"
+  },
+  "nodeGroups": [],
+  "id": "RuuCWG3fgcprIHEw",
+  "tags": []
+}
