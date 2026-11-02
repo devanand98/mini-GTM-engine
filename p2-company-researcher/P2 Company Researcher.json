@@ -1,0 +1,549 @@
+{
+  "name": "P2 Company Researcher",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload Data",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Accounts",
+              "fieldType": "file"
+            },
+            {
+              "fieldLabel": "YC Data",
+              "fieldType": "file",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "99fce71b-0297-4151-838f-99288480e990",
+      "name": "Upload Data",
+      "webhookId": "c863737b-51fd-440d-ace6-339139ecb2f7"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "YC_Data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        -192
+      ],
+      "id": "33918f7b-9aa0-4a88-9264-b1a6678ec457",
+      "name": "Read YC Data"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "Accounts",
+        "options": {
+          "headerRow": true
+        }
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        144
+      ],
+      "id": "a5287847-a5fd-44dc-8c78-b45a169b6245",
+      "name": "Read accounts data"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "domain",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        432,
+        -16
+      ],
+      "id": "7d14a965-6213-43a4-b03c-a8301c50f550",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "7d56de02-94f8-4693-b655-e25a6e7f8d2e",
+              "leftValue": "={{ $json.is_customer }}",
+              "rightValue": "FALSE",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.4,
+      "position": [
+        656,
+        -16
+      ],
+      "id": "f0929f3d-4a23-42c3-844b-8d6bd671d44e",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "maxItems": 15
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        880,
+        -16
+      ],
+      "id": "f90788dd-2bd1-41c4-8d0d-5ab82187ee82",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1104,
+        -16
+      ],
+      "id": "4575383f-2784-472f-97d4-ba1ddfa353d3",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "url": "=https://{{ $json.domain }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "outputPropertyName": "html"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1344,
+        64
+      ],
+      "id": "9a7c9c7e-d7f6-49d2-9271-b5f8a5b1977d",
+      "name": "HTTP Request",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.homepage_text.slice(0,6000) }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "what_they_do",
+              "description": "One plain sentence, max 20 words, saying what the company sells. Use only the text.",
+              "required": true
+            },
+            {
+              "name": "b2b_saas",
+              "description": "\"yes\" if the company sells software to businesses, \"no\" if it clearly sells to consumers or does not sell software, otherwise \"unknown\".",
+              "required": true
+            },
+            {
+              "name": "b2b_saas_quote",
+              "description": "A quote of 5 to 25 words copied EXACTLY, character for character, from the text, that supports the b2b_saas answer. Empty if unknown.",
+              "required": true
+            },
+            {
+              "name": "data_product",
+              "description": "\"yes\" if the product shows data, analytics, dashboards or reports to its customers, or syncs data between business systems; \"no\" if clearly not; otherwise \"unknown\".",
+              "required": true
+            },
+            {
+              "name": "data_product_quote",
+              "description": "A quote of 5 to 25 words copied EXACTLY, character for character, from the text, that supports the data_product answer. Empty if unknown.",
+              "required": true
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Use ONLY the text provided. Never use outside knowledge about the company. If the text does not clearly answer, use \"unknown\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        1664,
+        64
+      ],
+      "id": "f224bdb0-fae2-4175-80b6-cf38d9ba1edb",
+      "name": "Extract with AI",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash-lite",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1664,
+        336
+      ],
+      "id": "0213c9e8-8819-468d-8ba3-075c248fd7e1",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "x6CBYCUsHjoEBGaB",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "33bfbc6f-296b-42c3-aa37-835d94fc7b72",
+              "name": "account_id",
+              "value": "={{ $('Loop Over Items').item.json.account_id }}",
+              "type": "string"
+            },
+            {
+              "id": "c97b908e-3901-49c6-81d5-c4e6f9cd6af8",
+              "name": "company_name",
+              "value": "={{ $('Loop Over Items').item.json.company_name }}",
+              "type": "string"
+            },
+            {
+              "id": "c29376f5-de50-40ee-a85e-edbcc2203e08",
+              "name": "domain",
+              "value": "={{ $('Loop Over Items').item.json.domain }}",
+              "type": "string"
+            },
+            {
+              "id": "ec3ccbf7-7652-4191-95e3-637c3294437f",
+              "name": "yc_is_hiring",
+              "value": "={{ $('Loop Over Items').item.json.yc_is_hiring }}",
+              "type": "string"
+            },
+            {
+              "id": "444ea687-ab53-4220-8d10-e05eb337abc2",
+              "name": "yc_one_liner",
+              "value": "={{ $('Loop Over Items').item.json.yc_one_liner }}",
+              "type": "string"
+            },
+            {
+              "id": "bec62129-7606-45a3-9072-35ed898bf45a",
+              "name": "page_status",
+              "value": "={{ $('HTTP Request').item.json.error ? 'fetch_failed' : 'ok' }}",
+              "type": "string"
+            },
+            {
+              "id": "837fde06-f085-4e51-be53-5b3238fce87f",
+              "name": "what_they_do",
+              "value": "={{ $json.output.what_they_do }}",
+              "type": "string"
+            },
+            {
+              "id": "0d2eac0a-7f5c-4d87-b432-266d37545017",
+              "name": "b2b_saas",
+              "value": "={{ ($('Get page text').item.json.homepage_text || '').toLowerCase().replace(/[’‘]/g, \"'\").replace(/\\s+/g, ' ').includes((($json.output || {}).b2b_saas_quote || '###').toLowerCase().replace(/[’‘]/g, \"'\").replace(/\\s+/g, ' ').trim()) ? $json.output.b2b_saas : 'unknown' }}",
+              "type": "string"
+            },
+            {
+              "id": "38886659-3021-41d2-a95b-1b0ba15a004e",
+              "name": "b2b_saas_quote",
+              "value": "={{ $json.output.b2b_saas_quote }}",
+              "type": "string"
+            },
+            {
+              "id": "5179dbcd-70c4-4080-a3f3-7eb5bfddab96",
+              "name": "data_product_quote",
+              "value": "={{ $json.output.data_product_quote }}",
+              "type": "string"
+            },
+            {
+              "id": "35ad8c31-9171-4484-8c39-ff17c4fcaf81",
+              "name": "data_product",
+              "value": "={{ ($('Get page text').item.json.homepage_text || '').toLowerCase().replace(/[’‘]/g, \"'\").replace(/\\s+/g, ' ').includes((($json.output || {}).data_product_quote || '###').toLowerCase().replace(/[’‘]/g, \"'\").replace(/\\s+/g, ' ').trim()) ? $json.output.data_product : 'unknown' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1920,
+        64
+      ],
+      "id": "438872e6-d45b-4731-a3fe-9c162e9a5508",
+      "name": "Check Quotes"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "dataPropertyName": "html",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "homepage_text",
+              "cssSelector": "body",
+              "skipSelectors": "script, style, noscript, svg, nav, header, footer"
+            }
+          ]
+        },
+        "options": {
+          "cleanUpText": true
+        }
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1488,
+        64
+      ],
+      "id": "dc6f671c-e93a-4698-925c-8da08446f8f4",
+      "name": "Get page text",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": 7
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        64
+      ],
+      "id": "aff22212-49ab-4b74-b6d2-4e862ed5dbfd",
+      "name": "Wait",
+      "webhookId": "b4770d00-99dd-4657-95b5-df5abdfebaba"
+    },
+    {
+      "parameters": {
+        "binaryPropertyName": "evidence.csv",
+        "options": {
+          "fileName": "evidence"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1360,
+        -224
+      ],
+      "id": "7e59c92f-9349-4583-8408-69a1d99e22a7",
+      "name": "Convert to File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Upload Data": {
+      "main": [
+        [
+          {
+            "node": "Read accounts data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Read YC Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read accounts data": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Read YC Data": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Get page text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extract with AI",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract with AI": {
+      "main": [
+        [
+          {
+            "node": "Check Quotes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get page text": {
+      "main": [
+        [
+          {
+            "node": "Extract with AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Quotes": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d1e54b30-bdb8-471c-8405-cfc86a9fd586",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1f3faca7019ee6873821af51705374953a0cf48e28599af68a598555ddc83b46"
+  },
+  "nodeGroups": [],
+  "id": "Q1nrDlNtRD4RLe0w",
+  "tags": []
+}

@@ -1,0 +1,16 @@
+company,signal,AI said,I found,agree (yes/no),why different
+Clerky,yc_is_hiring,no,no,yes,
+Clerky,b2b_saas,yes,yes,yes,
+Clerky,data_product,unknown,yes,no,"company documentation, so not purely a data product"
+Videopixie,yc_is_hiring,no,no,yes,
+Videopixie,b2b_saas,no,no,yes,
+Videopixie,data_product,unknown,no,no,its video so not a data product
+SingleStore,yc_is_hiring,no,no,yes,
+SingleStore,b2b_saas,yes,yes,yes,
+SingleStore,data_product,unknown,yes,no,its a pure ai data product. idk why it was marked as unknown
+DemandSphere,yc_is_hiring,no,no,yes,
+DemandSphere,b2b_saas,yes,yes,yes,
+DemandSphere,data_product,yes,yes,yes,
+Upwave,yc_is_hiring,no,no,yes,
+Upwave,b2b_saas,yes,yes,yes,
+Upwave,data_product,unknown,yes,no,It is a marketing data product.
